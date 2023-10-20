@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+  </head>
+  <body>
+    <h1>Movie Search</h1>
+    <form onsubmit="return searchMovie();">
+      <label for="title">Enter movie title:</label>
+      <input type="text" id="title" name="title" required>
+      <button type="submit">Search</button>
+    </form>
+    <div id="movie-details"></div>
+
+    <script>
+      function searchMovieByTitle() 
+      {
+        const title = document.getElementById('title').value;
+        fetch(`https://www.omdbapi.com/?t=${title}&apikey=<YOUR_API_KEY>`)
+          .then(response => response.json())
+          .then(data => 
+          {
+            const movieDetails = document.getElementById('movie-details');
+            if (data.Error) 
+            {
+              movieDetails.innerHTML = `<p>${data.Error}</p>`;
+            } 
+            else 
+            {
+              movieDetails.innerHTML = `
+                <h2>${data.Title} (${data.Year})</h2>
+                <p>Directed by ${data.Director}</p>
+                <p>${data.Plot}</p>
+                <img src="${data.Poster}">
+              `;
+            }
+          })
+          .catch(error => 
+          {
+            const movieDetails = document.getElementById('movie-details');
+            movieDetails.innerHTML = `<p>Something went wrong. Please try again later.</p>`;
+            console.error(error);
+          });
+        return false;
+      }
+    </script>
+  </body>
+</html>

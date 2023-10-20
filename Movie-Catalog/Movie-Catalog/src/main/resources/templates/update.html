@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Movie</title>
+</head>
+<body>
+    <h1>Add Movie</h1>
+    <form action="/add" method="post">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" th:value="${movie.title}" required>
+        <br>
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" th:value="${movie.description}" required>
+        <br>
+        <label for="genre">Genre:</label>
+        <input type="text" id="genre" name="genre" th:value="${movie.genre}" required>
+        <br>
+        <br>
+        <label for="imbdRating">IMBDRating:</label>
+        <input type="number" id="imbdRating" name="imbdRating" th:value="${movie.imbdRating}" required>
+        <br>
+        <button type="submit">Update Movie</button>
+    </form>
+</body>
+</html>
